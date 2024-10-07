@@ -24,12 +24,14 @@ def collect_football_data():
             json.dump(data, f, indent=4)
         
         print(f"{len(data['matches'])} maç verisi başarıyla kaydedildi.")
+        return data
     except requests.exceptions.RequestException as e:
         print(f"API isteği sırasında bir hata oluştu: {str(e)}")
     except json.JSONDecodeError:
         print("JSON verisi ayrıştırılırken bir hata oluştu.")
     except Exception as e:
         print(f"Beklenmeyen bir hata oluştu: {str(e)}")
+    return None
 
 if __name__ == '__main__':
     collect_football_data()
