@@ -2,8 +2,8 @@ import pandas as pd
 
 def combine_datasets():
     # Dataset'leri yükleyin
-    statsbomb_df = pd.read_csv('/Users/firatcelik/Documents/futbol_analiz_projesi/data/processed/statsbomb_matches_clean.csv')
-    football_data_df = pd.read_csv('/Users/firatcelik/Documents/futbol_analiz_projesi/data/processed/football_data_matches_clean.csv')
+    statsbomb_df = pd.read_csv('data/processed/statsbomb_matches_clean.csv')
+    football_data_df = pd.read_csv('data/processed/football_data_matches_clean.csv')
     
     # Lig bilgisini ekleyin
     statsbomb_df['league'] = 'La Liga'
@@ -21,7 +21,7 @@ def combine_datasets():
     combined_df = pd.concat([statsbomb_df, football_data_df], ignore_index=True)
     
     # Birleştirilmiş dataset'i kaydedin
-    combined_df.to_csv('/Users/firatcelik/Documents/futbol_analiz_projesi/data/processed/combined_matches.csv', index=False)
+    combined_df.to_csv('data/processed/combined_matches.csv', index=False)
     print("Datasets combined and saved successfully.")
 
 if __name__ == '__main__':
