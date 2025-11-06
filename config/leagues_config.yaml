@@ -1,0 +1,259 @@
+---
+# Multi-Sport Analytics Platform Configuration
+# Supports Football and Basketball with 10 Major Leagues Each
+
+sports:
+  football:
+    name: "Football"
+    api_sources:
+      - name: "StatsBomb"
+        priority: 1
+      - name: "Football-Data.org"
+        priority: 2
+      - name: "API-Football"
+        priority: 3
+
+    leagues:
+      - id: "EPL"
+        name: "English Premier League"
+        country: "England"
+        competition_id: 2
+        season: "2023/24"
+        teams: 20
+        api_source: "Football-Data.org"
+
+      - id: "LALIGA"
+        name: "La Liga"
+        country: "Spain"
+        competition_id: 11
+        season: "2023/24"
+        teams: 20
+        api_source: "StatsBomb"
+
+      - id: "SERIEA"
+        name: "Serie A"
+        country: "Italy"
+        competition_id: 12
+        season: "2023/24"
+        teams: 20
+        api_source: "Football-Data.org"
+
+      - id: "BUNDESLIGA"
+        name: "Bundesliga"
+        country: "Germany"
+        competition_id: 9
+        season: "2023/24"
+        teams: 18
+        api_source: "Football-Data.org"
+
+      - id: "LIGUE1"
+        name: "Ligue 1"
+        country: "France"
+        competition_id: 7
+        season: "2023/24"
+        teams: 18
+        api_source: "Football-Data.org"
+
+      - id: "EREDIVISIE"
+        name: "Eredivisie"
+        country: "Netherlands"
+        competition_id: 1
+        season: "2023/24"
+        teams: 18
+        api_source: "Football-Data.org"
+
+      - id: "PRIMEIRALIGA"
+        name: "Primeira Liga"
+        country: "Portugal"
+        competition_id: 8
+        season: "2023/24"
+        teams: 18
+        api_source: "Football-Data.org"
+
+      - id: "BRASILEIRAO"
+        name: "Brasileiro Série A"
+        country: "Brazil"
+        competition_id: 24
+        season: "2023"
+        teams: 20
+        api_source: "API-Football"
+
+      - id: "ARGENTINA"
+        name: "Liga Profesional Argentina"
+        country: "Argentina"
+        competition_id: 128
+        season: "2023"
+        teams: 28
+        api_source: "API-Football"
+
+      - id: "MLS"
+        name: "Major League Soccer"
+        country: "USA"
+        competition_id: 253
+        season: "2023"
+        teams: 29
+        api_source: "API-Football"
+
+  basketball:
+    name: "Basketball"
+    api_sources:
+      - name: "NBA-API"
+        priority: 1
+      - name: "Basketball-Data"
+        priority: 2
+      - name: "SportsData.io"
+        priority: 3
+
+    leagues:
+      - id: "NBA"
+        name: "NBA"
+        country: "USA"
+        competition_id: 12
+        season: "2023-24"
+        teams: 30
+        api_source: "NBA-API"
+
+      - id: "EUROLEAGUE"
+        name: "EuroLeague"
+        country: "Europe"
+        competition_id: 203
+        season: "2023-24"
+        teams: 18
+        api_source: "Basketball-Data"
+
+      - id: "ACB"
+        name: "Liga ACB"
+        country: "Spain"
+        competition_id: 120
+        season: "2023-24"
+        teams: 18
+        api_source: "Basketball-Data"
+
+      - id: "BSL"
+        name: "Turkish BSL"
+        country: "Turkey"
+        competition_id: 146
+        season: "2023-24"
+        teams: 16
+        api_source: "Basketball-Data"
+
+      - id: "LEGA_BASKET"
+        name: "Lega Basket Serie A"
+        country: "Italy"
+        competition_id: 127
+        season: "2023-24"
+        teams: 16
+        api_source: "Basketball-Data"
+
+      - id: "BBL"
+        name: "Basketball Bundesliga"
+        country: "Germany"
+        competition_id: 126
+        season: "2023-24"
+        teams: 18
+        api_source: "Basketball-Data"
+
+      - id: "LNB"
+        name: "LNB Pro A"
+        country: "France"
+        competition_id: 133
+        season: "2023-24"
+        teams: 18
+        api_source: "Basketball-Data"
+
+      - id: "GREEK_BASKET"
+        name: "Greek Basket League"
+        country: "Greece"
+        competition_id: 138
+        season: "2023-24"
+        teams: 14
+        api_source: "Basketball-Data"
+
+      - id: "CBA"
+        name: "Chinese Basketball Association"
+        country: "China"
+        competition_id: 144
+        season: "2023-24"
+        teams: 20
+        api_source: "Basketball-Data"
+
+      - id: "NBL"
+        name: "Australian NBL"
+        country: "Australia"
+        competition_id: 283
+        season: "2023-24"
+        teams: 10
+        api_source: "Basketball-Data"
+
+# Analysis Configuration
+analysis:
+  football:
+    key_metrics:
+      - "goals"
+      - "shots"
+      - "shots_on_target"
+      - "possession"
+      - "passes"
+      - "pass_accuracy"
+      - "tackles"
+      - "fouls"
+      - "corners"
+      - "xG"  # Expected Goals
+      - "xA"  # Expected Assists
+      - "progressive_passes"
+      - "dribbles"
+
+    advanced_metrics:
+      - "xT"  # Expected Threat
+      - "PPDA"  # Passes Allowed Per Defensive Action
+      - "build_up_speed"
+      - "defensive_line_height"
+      - "pressing_intensity"
+
+  basketball:
+    key_metrics:
+      - "points"
+      - "rebounds"
+      - "assists"
+      - "steals"
+      - "blocks"
+      - "turnovers"
+      - "field_goal_pct"
+      - "three_point_pct"
+      - "free_throw_pct"
+      - "plus_minus"
+      - "minutes_played"
+
+    advanced_metrics:
+      - "PER"  # Player Efficiency Rating
+      - "true_shooting_pct"
+      - "effective_fg_pct"
+      - "usage_rate"
+      - "offensive_rating"
+      - "defensive_rating"
+      - "win_shares"
+      - "box_plus_minus"
+
+# Report Configuration
+reports:
+  types:
+    - "league_overview"
+    - "team_analysis"
+    - "player_scouting"
+    - "tactical_breakdown"
+    - "predictive_insights"
+    - "season_summary"
+
+  export_formats:
+    - "pdf"
+    - "html"
+    - "json"
+    - "excel"
+
+  visualizations:
+    - "heatmaps"
+    - "radar_charts"
+    - "trend_lines"
+    - "shot_charts"
+    - "pass_networks"
+    - "comparison_charts"
