@@ -12,7 +12,7 @@ import os
 from datetime import datetime
 
 # App configuration
-from app.config.products import (
+from config.products import (
     PlanTier, get_plan, get_plan_features,
     check_usage_limit, get_upgrade_recommendation
 )
@@ -75,7 +75,7 @@ async def check_feature_access(
     user: dict = Depends(get_current_user)
 ):
     """Check if user has access to a feature."""
-    from app.config.products import can_access_feature
+    from config.products import can_access_feature
 
     if not can_access_feature(user["plan_tier"], feature):
         upgrade_to = get_upgrade_recommendation(user["plan_tier"], feature)
@@ -134,7 +134,7 @@ async def root():
 @app.get("/api/v1/pricing")
 async def get_pricing():
     """Get all pricing plans."""
-    from app.config.products import PLANS
+    from config.products import PLANS
 
     plans_data = []
     for tier, plan in PLANS.items():
@@ -467,7 +467,7 @@ if __name__ == "__main__":
     import uvicorn
 
     uvicorn.run(
-        "app.main:app",
+        "main:app",
         host="0.0.0.0",
         port=8000,
         reload=True,

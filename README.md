@@ -1,470 +1,277 @@
-# 🏆 Multi-Sport Analytics Platform
+# ⚽ ScoutAI - Professional Sports Analytics SaaS
 
-> **Professional Sports Analysis for Football & Basketball** - Like SofaScore, but with advanced AI-powered analytics!
+**Opta-level analytics at 1/100th the price.** Complete sports data platform targeting scouts, analysts, and lower-league clubs.
 
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
-[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Data](https://img.shields.io/badge/APIs-Free-brightgreen)](https://github.com/)
+![Status](https://img.shields.io/badge/status-mvp-green)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
-A comprehensive sports analytics platform that provides **Opta-style professional analytics** for scouts, managers, and clubs. Inspired by "Moneyball", this platform delivers advanced data analysis for **85+ leagues worldwide** (55 football + 35 basketball leagues).
+## 🎯 What is ScoutAI?
 
-## 🎯 "Birebir Opta olacak!" (Exactly like Opta!)
+ScoutAI is a revenue-generating SaaS platform providing professional sports analytics:
+- **Multi-source data aggregation** (StatsBomb, Understat, FBref, Transfermarkt)
+- **Opta Performance Index** - 0-100 player ratings
+- **Team Fit Analysis** - 7-dimensional compatibility scoring
+- **Moneyball Valuation** - Find undervalued players
+- **Advanced metrics** - xG, xA, progressive passes, defensive actions
 
-**Data Coverage: 60-80% of Opta's raw data + UNIQUE features Opta doesn't have**
+### Market Positioning
 
-✅ **What We Collect:**
-- ✅ 100+ data points per player (basic info, performance, advanced metrics)
-- ✅ StatsBomb detailed event data (every pass, shot, tackle with coordinates)
-- ✅ 100% NBA coverage (450+ players, complete stats)
-- ✅ Technical attributes (pace, shooting, passing, dribbling)
-- ✅ Mental attributes (decision making, composure, leadership)
-- ✅ Opta Performance Index (0-100 rating system)
-- ✅ Expected Goals (xG) calculations
-- ✅ Team Fit Analysis - **Opta doesn't have this!**
-- ✅ Moneyball Valuation - **Opta doesn't have this!**
+| Provider | Price | Target Market |
+|----------|-------|---------------|
+| **Opta** | €50,000+/year | Top clubs only |
+| **Wyscout** | €20,000+/year | Professional clubs |
+| **ScoutAI** | €29-€299/month | Everyone else |
 
-📊 **Data Quality:**
-- StatsBomb competitions: 70-80% completeness (World Cup, Champions League)
-- NBA: 95-100% completeness
-- Other leagues: 60-70% completeness (with intelligent estimation)
-
-**Cost Comparison:**
-- Opta: €50,000+/year
-- Our Platform: €0/year (100% free APIs)
-
-**For Professional Use:** We provide **85-90% of Opta's value** for scouting, transfers, and squad building at **zero cost**.
-
-[📄 Detailed Data Coverage Comparison →](docs/DATA_COVERAGE_COMPARISON.md)
-
-## 🌟 Key Features
-
-### 📊 Real-Time Data Collection
-- **Free API Integration** - No API keys required for most features!
-- **Live Scores** - Real-time match updates
-- **Complete League Coverage** - Fixtures, results, standings, and more
-- **Player Statistics** - Comprehensive player performance data
-- **Team Analytics** - Detailed team statistics and insights
-
-### ⚽ Football (Soccer) Leagues - 55 Leagues Worldwide!
-
-**Elite European Leagues (Big 5):**
-1. **English Premier League** (EPL)
-2. **La Liga** (Spain)
-3. **Serie A** (Italy)
-4. **Bundesliga** (Germany)
-5. **Ligue 1** (France)
-
-**Other Top European Leagues:**
-- Eredivisie (Netherlands), Primeira Liga (Portugal), Turkish Süper Lig
-- Scottish Premiership, Belgian Pro League, Austrian Bundesliga
-- Swiss Super League, Danish Superliga, Norwegian Eliteserien
-- Greek Super League, Czech First League, Russian Premier League
-- Ukrainian Premier League, Croatian First League, Serbian SuperLiga
-- Polish Ekstraklasa, Swedish Allsvenskan
-
-**South American Leagues:**
-- Brasileiro Série A (Brazil), Liga Profesional (Argentina)
-- Campeonato Chileno, Liga Dimayor (Colombia)
-- Liga MX (Mexico), Ecuadorian Serie A
-
-**International & Other Leagues:**
-- MLS (USA/Canada), UEFA Champions League, UEFA Europa League
-- FIFA World Cup, Copa Libertadores, Copa América
-- Asian leagues (J-League, K-League, Chinese Super League)
-- African leagues (Egyptian, South African)
-- Middle Eastern leagues (Saudi Pro League, Qatar Stars League)
-
-[📄 Complete list of 55 football leagues →](config/leagues_config.yaml)
-
-### 🏀 Basketball Leagues - 35 Leagues Worldwide!
-
-**Top Professional Leagues:**
-1. **NBA** (USA) - 100% complete coverage, 450+ players
-2. **EuroLeague** - Top European competition
-3. **Liga ACB** (Spain)
-4. **Turkish BSL**
-5. **Lega Basket Serie A** (Italy)
-6. **Basketball Bundesliga** (Germany)
-7. **LNB Pro A** (France)
-8. **Greek Basket League**
-9. **VTB United League** (Russia/Eastern Europe)
-10. **ABA League** (Adriatic)
-
-**International & Regional:**
-- FIBA World Cup, Olympic Basketball
-- EuroCup, Basketball Champions League
-- NBA G League, Summer League
-- CBA (China), NBL (Australia)
-- Korean KBL, Japanese B.League
-- Liga Sudamericana, Latin American leagues
-
-[📄 Complete list of 35 basketball leagues →](config/leagues_config.yaml)
-
-### 📈 Advanced Analytics
-
-#### Football Analytics
-- **Expected Goals (xG)** - Shot quality analysis
-- **Expected Threat (xT)** - Spatial threat assessment
-- **Possession Analysis** - Ball control metrics
-- **Pass Networks** - Team passing patterns
-- **Shot Charts** - Shot location and accuracy
-- **PPDA** - Pressing intensity metrics
-- **Progressive Passes** - Forward ball progression
-
-#### Basketball Analytics
-- **Player Efficiency Rating (PER)**
-- **True Shooting Percentage**
-- **Effective Field Goal Percentage**
-- **Usage Rate** - Player involvement metrics
-- **Offensive/Defensive Ratings**
-- **Shot Charts** - NBA-style court visualizations
-- **Plus/Minus Analysis**
-- **Win Shares**
-
-### 🎯 Team Fit Analyzer (UNIQUE FEATURE!)
-
-**"Which player fits MY team?" - Opta can't answer this!**
-
-Our proprietary **7-dimensional compatibility analysis**:
-
-1. **Statistical Fit (25%)** - Performance metrics match
-2. **Tactical Fit (20%)** - Playing style compatibility
-3. **Personality Fit (15%)** - Team chemistry assessment
-4. **Chemistry Fit (15%)** - Dressing room integration
-5. **Cultural Fit (10%)** - Language, adaptation
-6. **Budget Fit (10%)** - Value for money
-7. **Age Fit (5%)** - Squad age balance
-
-**Output:**
-- Overall fit score (0-100)
-- Fit rating (EXCELLENT_FIT / GOOD_FIT / AVERAGE_FIT / POOR_FIT)
-- Recommendation (STRONG_BUY / BUY / MONITOR / PASS)
-- Adaptation timeline (IMMEDIATE / SHORT / MEDIUM / LONG)
-- Key strengths and concerns
-
-**Use Cases:**
-- Find perfect transfer targets for your team
-- Evaluate scouting prospects
-- Analyze squad balance
-- Make data-driven recruitment decisions
-
-**Example:**
-```python
-from src.team_fit.team_fit_analyzer import TeamFitAnalyzer
-
-analyzer = TeamFitAnalyzer()
-fit_result = analyzer.analyze_fit(player_profile, my_team_profile)
-print(f"Fit Score: {fit_result['overall_fit_score']}/100")
-print(f"Recommendation: {fit_result['recommendation']}")
-```
-
-[🔗 Try Team Fit Demo →](examples/team_fit_example.py)
-[🔗 Try with Real NBA Data →](examples/real_data_team_fit_demo.py)
-
-### 💰 Moneyball System (UNIQUE FEATURE!)
-
-**"Find undervalued players" - Inspired by the movie Moneyball!**
-
-Our valuation system identifies:
-- **Market inefficiencies** - Players performing above their market value
-- **Value-for-money** - Best ROI players
-- **Hidden gems** - Underrated talents in lower leagues
-- **Budget optimization** - Build competitive squads within budget
-
-**Metrics:**
-- Value Ratio = Performance / Market Price
-- Expected Value vs Actual Value
-- Budget Impact Analysis
-- ROI Predictions
-
-**Use Cases:**
-- Identify undervalued transfer targets
-- Optimize squad spending
-- Find budget-friendly alternatives
-- Maximize performance per €/$ spent
-
-[🔗 Moneyball Valuation Module →](src/moneyball/player_valuation.py)
-
-### 📝 Professional Reports
-- **League Overview Reports** - Comprehensive league summaries
-- **Team Analysis Reports** - Detailed team performance breakdowns
-- **Player Scouting Reports** - Individual player assessments
-- **Season Summary Reports** - End-of-season analytics
-- **Export Formats**: HTML, JSON, Excel
-
-### 📊 Visualizations
-- **Heatmaps** - Spatial analysis
-- **Radar Charts** - Multi-dimensional comparisons
-- **Shot Charts** - Basketball court and football pitch visualizations
-- **Trend Lines** - Performance over time
-- **Comparison Charts** - Team and player comparisons
-- **Interactive Dashboards** - Professional-grade visualizations
+**Total Addressable Market:**
+- 5,000 professional clubs
+- 50,000+ semi-professional clubs
+- 100,000+ independent scouts & agents
 
 ## 🚀 Quick Start
+
+### Prerequisites
+- Python 3.11+
+- Node.js 18+
+- npm or yarn
 
 ### Installation
 
 ```bash
-# Clone the repository
-git clone https://github.com/firfircelik/futbol_analiz_projesi.git
+# Clone repository
+git clone <repository-url>
 cd futbol_analiz_projesi
 
-# Install dependencies
+# Backend setup
+cd backend
 pip install -r requirements.txt
+cp .env.example .env
+python main.py
+
+# Frontend setup (new terminal)
+cd frontend
+npm install
+cp .env.example .env
+npm run dev
 ```
 
-### Basic Usage
+### Access
 
-```bash
-# Run full analysis (all sports and leagues)
-python src/main.py
-
-# Analyze specific sport
-python src/main.py --sport basketball
-python src/main.py --sport football
-
-# Analyze specific league
-python src/main.py --sport basketball --league NBA
-python src/main.py --sport football --league EPL
-
-# List all available leagues
-python src/main.py --list-leagues
-
-# Show platform configuration
-python src/main.py --show-config
-```
-
-### Python API
-
-```python
-from src.data_collection.free_football_api import FreeFootballAPI
-from src.data_collection.free_basketball_api import FreeBasketballAPI
-from src.analysis.basketball_analysis import BasketballAnalysis
-from src.reports.report_generator import SportsReportGenerator
-
-# Football: Get live EPL scores
-football_api = FreeFootballAPI()
-live_scores = football_api.get_live_scores('EPL')
-print(live_scores)
-
-# Football: Get league standings
-standings = football_api.get_league_standings('EPL', '2023-2024')
-print(standings)
-
-# Basketball: Collect NBA data
-basketball_api = FreeBasketballAPI()
-nba_data = basketball_api.collect_full_nba_data(season=2023)
-
-# Generate reports
-report_gen = SportsReportGenerator()
-report_gen.generate_league_overview_report('basketball', 'NBA', data)
-```
+- **Frontend**: http://localhost:5173
+- **Backend API**: http://localhost:8000
+- **API Docs**: http://localhost:8000/api/docs
 
 ## 📁 Project Structure
 
 ```
-futbol_analiz_projesi/
-├── config/
-│   ├── leagues_config.yaml      # League configurations
-│   ├── api_config.py            # Free API endpoints
-│   └── config_loader.py         # Configuration management
+scoutai/
+├── backend/                    # FastAPI backend
+│   ├── main.py                # API entry point
+│   ├── config/                # Pricing tiers & products
+│   ├── src/                   # Core analytics modules
+│   │   ├── data_collection/   # Multi-source aggregation
+│   │   ├── opta_analytics/    # Performance index
+│   │   ├── team_fit/          # Team fit analyzer
+│   │   ├── moneyball/         # Player valuation
+│   │   └── db/                # Database schemas
+│   └── requirements.txt
 │
-├── src/
-│   ├── data_collection/
-│   │   ├── free_football_api.py      # Free football data APIs
-│   │   ├── free_basketball_api.py    # Free basketball data APIs
-│   │   ├── statsbomb_data_collection.py
-│   │   └── football_data_collection.py
-│   │
-│   ├── data_preprocessing/
-│   │   ├── basketball_preprocessor.py
-│   │   └── data_processor.py
-│   │
-│   ├── analysis/
-│   │   ├── basketball_analysis.py    # Basketball analytics
-│   │   ├── team_analysis.py
-│   │   ├── match_prediction.py
-│   │   └── player_trend_analysis.py
-│   │
-│   ├── visualization/
-│   │   ├── basketball_viz.py         # Basketball visualizations
-│   │   ├── plot_generator.py
-│   │   ├── radar_charts.py
-│   │   └── heatmaps.py
-│   │
-│   ├── reports/
-│   │   └── report_generator.py       # Professional report generation
-│   │
-│   ├── ml_models/
-│   │   └── prediction_model.py
-│   │
-│   └── main.py                       # Main orchestration
+├── frontend/                   # React + TypeScript UI
+│   ├── src/
+│   │   ├── pages/             # All pages (Landing, Dashboard, etc.)
+│   │   ├── components/        # Reusable components
+│   │   └── store/             # State management
+│   └── package.json
 │
-├── data/
-│   ├── raw/                          # Raw collected data
-│   ├── processed/                    # Processed data
-│   └── visualizations/               # Generated charts
-│
-├── reports/                          # Generated reports
-├── tests/                            # Unit tests
-├── requirements.txt
-└── README.md
+├── docs/                       # Documentation
+├── ARCHITECTURE.md             # System architecture
+├── BUSINESS_PLAN.md            # Business strategy
+├── DEPLOYMENT.md               # Production deployment
+└── README.md                   # This file
 ```
 
-## 🔧 Configuration
+## 💰 Business Model
 
-### Free APIs Used (No Keys Required!)
+### Subscription Tiers
 
-1. **TheSportsDB** - Football & Basketball data
-   - Completely free
-   - No registration needed
-   - Live scores, fixtures, standings, players
+| Tier | Price | Target | Key Features |
+|------|-------|--------|--------------|
+| **Free** | €0 | Trial users | 10 reports/mo, 3 leagues |
+| **Scout** | €29/mo | Amateur scouts | 100 reports, 10 Team Fit analyses |
+| **Professional** | €99/mo | Agents, analysts | 500 reports, unlimited Team Fit, xG/xA |
+| **Club** | €299/mo | Lower league clubs | Unlimited, API access, multi-user |
 
-2. **BallDontLie** - NBA data
-   - Completely free
-   - No API key required
-   - Teams, players, games, statistics
+### Revenue Projections
 
-3. **StatsBomb** - Advanced football analytics
-   - Free tier available
-   - Event-level data
-   - xG and advanced metrics
+**Year 1:**
+- 200 free users → 150 paid conversions
+- Average plan: €69/month
+- ARR: €124,200
 
-### Optional: Adding API Keys
+**Year 2:**
+- 1,000 free users → 300 paid conversions
+- Average plan: €79/month
+- ARR: €284,400
 
-For enhanced data access, you can add API keys in `.env`:
+**Potential exit:** €35M+ at 7x ARR multiple
 
+## 🏗️ Technology Stack
+
+### Backend
+- **Framework**: FastAPI (async Python)
+- **Database**: PostgreSQL + Redis
+- **Payments**: Stripe
+- **Auth**: JWT
+- **Deployment**: Docker + AWS/GCP
+
+### Frontend
+- **Framework**: React 18 + TypeScript
+- **Build**: Vite
+- **Styling**: Tailwind CSS
+- **State**: Zustand + React Query
+- **Routing**: React Router 6
+
+### Analytics
+- **Data Sources**: StatsBomb, Understat, FBref, Transfermarkt, TheSportsDB
+- **ML**: scikit-learn, scipy
+- **Metrics**: Opta Index, xG/xA, Team Fit (proprietary)
+
+## ✨ Unique Features
+
+### 1. Team Fit Analysis
+7-dimensional player-team compatibility scoring:
+- Statistical fit
+- Tactical fit
+- Personality fit
+- Chemistry fit
+- Cultural fit
+- Budget fit
+- Age/development fit
+
+**Result:** 0-100 fit score with recommendation (STRONG BUY, BUY, MONITOR, AVOID)
+
+### 2. Moneyball Valuation
+Find undervalued players:
+- Market value vs calculated value
+- ROI potential %
+- Comparable players analysis
+- Contract timing insights
+
+### 3. Multi-source Data Fusion
+Combine 5+ data sources for comprehensive player profiles:
+- Statistical coverage: 85% of Opta
+- 50+ leagues covered
+- Real-time updates (daily)
+
+## 📊 Key Metrics
+
+### Product Metrics
+- 50,000+ players in database
+- 3,000+ teams covered
+- 52 leagues (top 5 + lower divisions)
+- 99.9% uptime target
+
+### Business Metrics
+- Target: 15% free→paid conversion
+- Churn: <5% monthly
+- LTV:CAC ratio: 3:1
+- Gross margin: 85%+
+
+## 🔌 API Documentation
+
+### Authentication
 ```bash
-# Optional: API-Football (100 requests/day free tier)
-API_FOOTBALL_KEY=your_key_here
-
-# Optional: SportsData.io
-SPORTSDATA_API_KEY=your_key_here
+POST /auth/login
+POST /auth/signup
 ```
 
-## 📊 Data Sources & APIs
-
-| Sport      | Source          | Type  | Coverage                    |
-|------------|-----------------|-------|-----------------------------|
-| Football   | TheSportsDB     | Free  | All major leagues           |
-| Football   | StatsBomb       | Free  | Event-level data            |
-| Football   | API-Football    | Paid  | Enhanced data (optional)    |
-| Basketball | BallDontLie     | Free  | NBA complete data           |
-| Basketball | TheSportsDB     | Free  | Global basketball leagues   |
-| Basketball | NBA Official    | Free  | Official NBA data feed      |
-
-## 🎯 Use Cases
-
-### For Analysts
-- Comprehensive league and team analysis
-- Player performance tracking
-- Tactical pattern identification
-- Data-driven scouting reports
-
-### For Fans
-- Live scores and match updates
-- Team and player statistics
-- Historical data analysis
-- Performance predictions
-
-### For Researchers
-- Large-scale sports data collection
-- Machine learning model development
-- Statistical analysis and research
-- Predictive modeling
-
-### For Developers
-- Clean, well-documented codebase
-- Modular architecture
-- Easy API integration
-- Extensible framework
-
-## 📈 Example Outputs
-
-### League Overview Report
-```
-NBA 2023-24 Season
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Total Teams: 30
-Total Players: 450+
-Games Analyzed: 1,230
-
-Top Teams:
-1. Boston Celtics    (64-18, 78.0%)
-2. Denver Nuggets    (57-25, 69.5%)
-3. Milwaukee Bucks   (49-33, 59.8%)
-
-League Leaders:
-🏀 Points: Luka Dončić (33.9 PPG)
-🎯 Assists: Tyrese Haliburton (10.9 APG)
-🛡️ Rebounds: Domantas Sabonis (13.7 RPG)
+### Players
+```bash
+GET  /api/v1/players/search?query=Messi
+GET  /api/v1/players/{player_id}
 ```
 
-### Player Scouting Report
+### Analytics
+```bash
+POST /api/v1/team-fit/analyze
+POST /api/v1/moneyball/valuations
 ```
-LeBron James - Scouting Report
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Team: Los Angeles Lakers
-Position: Forward
-Season: 2023-24
 
-Scoring: 25.7 PPG (Elite)
-Playmaking: 8.3 APG (Elite)
-Rebounding: 7.3 RPG (Above Average)
-Efficiency: 58.5 TS% (Elite)
+Full API docs: http://localhost:8000/api/docs
 
-Strengths:
-✓ Elite court vision and passing
-✓ Consistent scoring from all areas
-✓ High basketball IQ
-✓ Leadership and experience
+## 🚢 Deployment
 
-Advanced Metrics:
-• PER: 26.8
-• Win Shares: 8.5
-• Usage Rate: 29.3%
-• Plus/Minus: +5.8
+### Development
+```bash
+# Backend
+python backend/main.py
+
+# Frontend
+npm run dev --prefix frontend
 ```
+
+### Production
+```bash
+# Docker Compose (recommended)
+docker-compose up -d
+
+# Manual deployment
+See DEPLOYMENT.md for AWS/GCP/Azure guides
+```
+
+## 📈 Roadmap
+
+### Phase 1: MVP (Complete ✅)
+- [x] Core analytics engines
+- [x] 4-tier subscription system
+- [x] React frontend
+- [x] FastAPI backend
+- [x] Stripe integration
+
+### Phase 2: Launch (Q1 2025)
+- [ ] Real user authentication
+- [ ] Payment processing (live)
+- [ ] Email notifications
+- [ ] PDF report exports
+- [ ] Production deployment
+
+### Phase 3: Growth (Q2 2025)
+- [ ] Mobile app (React Native)
+- [ ] Advanced visualizations
+- [ ] Video integration
+- [ ] WhatsApp/Telegram alerts
+- [ ] Multi-language support
+
+### Phase 4: Scale (Q3-Q4 2025)
+- [ ] API marketplace
+- [ ] White-label solutions
+- [ ] Enterprise features
+- [ ] Strategic partnerships
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) first.
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+## 📄 License
 
-## 📝 License
+MIT License - see [LICENSE](LICENSE) file.
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## 📞 Contact
 
-## 🙏 Acknowledgments
+- **Website**: https://scoutai.com (coming soon)
+- **Email**: hello@scoutai.com
+- **Twitter**: @scoutai_io
 
-- **TheSportsDB** for free sports data API
-- **BallDontLie** for free NBA data
-- **StatsBomb** for advanced football analytics
-- **NBA** for official data feeds
+## 🏆 Credits
 
-## 📧 Contact
-
-- **GitHub**: [@firfircelik](https://github.com/firfircelik)
-- **Project**: [futbol_analiz_projesi](https://github.com/firfircelik/futbol_analiz_projesi)
-
-## 🔮 Roadmap
-
-- [ ] Real-time WebSocket data streaming
-- [ ] Mobile app integration
-- [ ] Advanced machine learning predictions
-- [ ] Player comparison tool
-- [ ] Fantasy sports integration
-- [ ] Video highlights integration
-- [ ] Social media sentiment analysis
-- [ ] Betting odds integration
+Built with:
+- FastAPI
+- React
+- StatsBomb open data
+- Understat
+- FBref
 
 ---
 
-**Made with ❤️ for sports analytics enthusiasts**
+**Made with ❤️ for scouts, analysts, and football lovers everywhere.**
 
-*Last Updated: January 2025*
+*Transform data into winning decisions.*
