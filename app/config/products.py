@@ -5,7 +5,7 @@ Defines all subscription plans and their features
 
 from enum import Enum
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Optional, Tuple
 
 
 class PlanTier(str, Enum):

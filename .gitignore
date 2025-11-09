@@ -143,6 +143,17 @@ reports/
 *~
 .DS_Store
 
+# Frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local
+frontend/package-lock.json
+
+# Backend
+app/.env
+app/scoutai.db
+
 # Project specific
 *.log
 temp/

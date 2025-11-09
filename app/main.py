@@ -204,12 +204,24 @@ async def get_current_user_info(user: dict = Depends(get_current_user)):
     }
 
 
+async def _check_api_quota(user: dict = Depends(get_current_user)):
+    return await check_usage_quota("api_requests_per_month", user)
+
+
+async def _check_player_reports_quota(user: dict = Depends(get_current_user)):
+    return await check_usage_quota("player_reports_per_month", user)
+
+
+async def _check_team_fit_quota(user: dict = Depends(get_current_user)):
+    return await check_usage_quota("team_fit_analyses_per_month", user)
+
+
 @app.get("/api/v1/players/search")
 async def search_players(
     query: str,
     league: Optional[str] = None,
     user: dict = Depends(get_current_user),
-    _: dict = Depends(check_usage_quota("api_requests_per_month"))
+    _: dict = Depends(_check_api_quota)
 ):
     """
     Search for players.
@@ -248,7 +260,7 @@ async def search_players(
 async def get_player_profile(
     player_id: str,
     user: dict = Depends(get_current_user),
-    _: dict = Depends(check_usage_quota("player_reports_per_month"))
+    _: dict = Depends(_check_player_reports_quota)
 ):
     """
     Get comprehensive player profile.
@@ -288,13 +300,17 @@ async def get_player_profile(
     }
 
 
+async def _check_team_fit_access(user: dict = Depends(get_current_user)):
+    return await check_feature_access("team_fit_analyses_per_month", user)
+
+
 @app.post("/api/v1/team-fit/analyze")
 async def analyze_team_fit(
     player_id: str,
     team_id: str,
     user: dict = Depends(get_current_user),
-    _: bool = Depends(lambda: check_feature_access("team_fit_analyses_per_month")),
-    __: dict = Depends(check_usage_quota("team_fit_analyses_per_month"))
+    _: bool = Depends(_check_team_fit_access),
+    __: dict = Depends(_check_team_fit_quota)
 ):
     """
     Analyze how well a player fits a team.
@@ -333,11 +349,15 @@ async def analyze_team_fit(
     }
 
 
+async def _check_moneyball_access(user: dict = Depends(get_current_user)):
+    return await check_feature_access("moneyball_valuation", user)
+
+
 @app.post("/api/v1/moneyball/valuations")
 async def get_moneyball_valuation(
     player_id: str,
     user: dict = Depends(get_current_user),
-    _: bool = Depends(lambda: check_feature_access("moneyball_valuation"))
+    _: bool = Depends(_check_moneyball_access)
 ):
     """
     Get Moneyball-style player valuation.
