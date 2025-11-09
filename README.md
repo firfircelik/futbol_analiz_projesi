@@ -1,6 +1,6 @@
-# 🏆 Multi-Sport Analytics Platform
+# Futbol Analiz Projesi
 
-> **Professional Sports Analysis for Football & Basketball** - Like SofaScore, but with advanced AI-powered analytics!
+Bu proje, futbol maçlarına yönelik veri analizi ve görselleştirme işlemleri için geliştirilmiştir. Veriler, StatsBomb ve Football-Data.org gibi kaynaklardan toplanarak analiz edilir ve sonuçlar görsel olarak sunulur.
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.109-009688)](https://fastapi.tiangolo.com/)
