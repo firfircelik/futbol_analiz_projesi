@@ -237,17 +237,13 @@ python src/main.py --show-config
 ### Python API
 
 ```python
-from src.data_collection.free_football_api import FreeFo
-
-otballAPI
+from src.data_collection.free_football_api import FreeFootballAPI
 from src.data_collection.free_basketball_api import FreeBasketballAPI
 from src.analysis.basketball_analysis import BasketballAnalysis
 from src.reports.report_generator import SportsReportGenerator
 
 # Football: Get live EPL scores
-football_api = FreeFo
-
-otballAPI()
+football_api = FreeFootballAPI()
 live_scores = football_api.get_live_scores('EPL')
 print(live_scores)
 

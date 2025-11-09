@@ -14,9 +14,7 @@ import json
 from config.api_config import FREE_APIS, THESPORTSDB_LEAGUE_IDS
 
 
-class FreeFo
-
-otballAPI:
+class FreeFootballAPI:
     """Collect real football data from free APIs."""
 
     def __init__(self, output_dir: str = "data/raw/football_free"):
@@ -376,9 +374,7 @@ otballAPI:
 
 if __name__ == "__main__":
     # Example usage
-    api = FreeFo
-
-otballAPI()
+    api = FreeFootballAPI()
 
     # Collect data for English Premier League
     epl_data = api.collect_full_league_data('EPL', '2023-2024')
