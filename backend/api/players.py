@@ -13,9 +13,9 @@ from schemas.player import PlayerBasicStats, PlayerAdvancedMetrics, PlayerPerfor
 
 router = APIRouter(prefix="/api/v1/players", tags=["Players"])
 
-# TODO: Import real services in Phase 2
-# from services.data_service import DataService
-# from services.opta_service import OptaService
+# Import real services
+from services.data_service import get_data_service
+from services.opta_service import get_opta_service
 
 
 @router.get("/search", response_model=PlayerSearchResponse)
@@ -39,52 +39,14 @@ async def search_players(
     - league: Filter by league (optional)
     - position: Filter by position (optional)
     """
-    # TODO Phase 2: Connect to real DataService
-    # data_service = DataService()
-    # results = await data_service.search_players(query, league, position)
-
-    # TEMPORARY: Mock data for Phase 1
-    mock_results = [
-        PlayerSearchResult(
-            player_id="player_messi",
-            name="Lionel Messi",
-            team="Inter Miami",
-            position="RW",
-            league="MLS",
-            opta_index=85.2,
-            market_value=25.0,
-            nationality="Argentina"
-        ),
-        PlayerSearchResult(
-            player_id="player_haaland",
-            name="Erling Haaland",
-            team="Manchester City",
-            position="ST",
-            league="Premier League",
-            opta_index=92.8,
-            market_value=180.0,
-            nationality="Norway"
-        )
-    ]
-
-    # Filter by query (case-insensitive)
-    filtered_results = [
-        r for r in mock_results
-        if query.lower() in r.name.lower()
-    ]
-
-    # Filter by league if specified
-    if league:
-        filtered_results = [r for r in filtered_results if r.league == league]
-
-    # Filter by position if specified
-    if position:
-        filtered_results = [r for r in filtered_results if r.position == position]
+    # Get data service and search players
+    data_service = get_data_service()
+    results = await data_service.search_players(query, league, position)
 
     return PlayerSearchResponse(
         query=query,
-        results=filtered_results,
-        total=len(filtered_results)
+        results=results,
+        total=len(results)
     )
 
 
@@ -104,59 +66,79 @@ async def get_player_profile(
     - Market data
     - Counts towards player reports quota
     """
-    # TODO Phase 2: Connect to real DataService and OptaService
-    # data_service = DataService()
-    # opta_service = OptaService()
-    #
-    # player_data = await data_service.get_player_profile(player_id)
-    # opta_index = opta_service.calculate_index(player_data)
-
-    # TEMPORARY: Mock data for Phase 1
     from core.products import get_plan_features
+    from fastapi import HTTPException, status
+
+    # Get services
+    data_service = get_data_service()
+    opta_service = get_opta_service()
+
+    # Get player data
+    player_data = await data_service.get_player_profile(player_id)
+
+    if not player_data:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Player not found: {player_id}"
+        )
+
+    # Get user features
     features = get_plan_features(user.plan_tier)
 
-    # Basic stats
+    # Extract basic info
+    basic_info = player_data.get('basic_info', {})
+    perf_stats = player_data.get('performance_stats', {})
+
+    # Create basic stats
     basic_stats = PlayerBasicStats(
-        goals=18,
-        assists=12,
-        minutes_played=2847,
-        matches=32
+        goals=perf_stats.get('goals', 0),
+        assists=perf_stats.get('assists', 0),
+        minutes_played=perf_stats.get('minutes_played', 0),
+        matches=perf_stats.get('matches', 0)
+    )
+
+    # Calculate Opta Index
+    opta_result = await opta_service.calculate_player_index(
+        player_data,
+        position=basic_info.get('position', 'MID')
     )
 
     # Advanced metrics (only if user has access)
     advanced_metrics = None
     if features.advanced_metrics:
+        xg_stats = player_data.get('xg_stats', {})
         advanced_metrics = PlayerAdvancedMetrics(
-            xg=16.8,
-            xa=9.3,
-            progressive_passes=156,
-            progressive_carries=89,
-            shots_on_target_pct=62.5
+            xg=xg_stats.get('total_xg', perf_stats.get('xg', 0.0)),
+            xa=perf_stats.get('xa', 0.0),
+            progressive_passes=perf_stats.get('progressive_passes', 0),
+            progressive_carries=perf_stats.get('progressive_carries', 0),
+            shots_on_target_pct=perf_stats.get('shots_on_target_pct', 0.0)
         )
 
     # Performance data
     performance = PlayerPerformance(
-        opta_index=85.2,
-        rating="EXCELLENT",
+        opta_index=opta_result.get('opta_index'),
+        rating=opta_result.get('rating'),
         basic_stats=basic_stats,
         advanced_metrics=advanced_metrics
     )
 
     # Market data
+    market_info = player_data.get('market_data', {})
     market_data = MarketData(
-        market_value=65.0,
-        currency="EUR",
-        contract_expires="2025-06-30"
+        market_value=market_info.get('market_value', 10.0),
+        currency=market_info.get('currency', 'EUR'),
+        contract_expires=market_info.get('contract_expires')
     )
 
     return PlayerProfile(
         player_id=player_id,
-        name="Mohamed Salah",
-        age=31,
-        position="RW",
-        team="Liverpool FC",
-        league="Premier League",
-        nationality="Egypt",
+        name=basic_info.get('name', player_data.get('player_name', 'Unknown')),
+        age=basic_info.get('age', 25),
+        position=basic_info.get('position', 'MID'),
+        team=basic_info.get('team', 'Unknown'),
+        league=player_data.get('league', 'Unknown'),
+        nationality=basic_info.get('nationality', 'Unknown'),
         performance=performance,
         market_data=market_data
     )

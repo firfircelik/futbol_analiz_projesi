@@ -13,9 +13,10 @@ from schemas.analytics import MoneyballValuationResponse, ComparablePlayer
 
 router = APIRouter(prefix="/api/v1/analytics", tags=["Analytics"])
 
-# TODO Phase 2: Import real services
-# from services.team_fit_service import TeamFitService
-# from services.moneyball_service import MoneyballService
+# Import real services
+from services.team_fit_service import get_team_fit_service
+from services.moneyball_service import get_moneyball_service
+from services.data_service import get_data_service
 
 
 @router.post("/team-fit", response_model=TeamFitResponse)
@@ -44,41 +45,68 @@ async def analyze_team_fit(
             detail="Team Fit Analysis requires Scout plan or higher. Upgrade to access this feature."
         )
 
-    # TODO Phase 2: Connect to real TeamFitService
-    # team_fit_service = TeamFitService()
-    # result = team_fit_service.analyze_fit(request.player_id, request.team_id)
+    # Get services
+    team_fit_service = get_team_fit_service()
+    data_service = get_data_service()
 
-    # TEMPORARY: Mock data for Phase 1
+    # Get player data
+    player_data = await data_service.get_player_profile(request.player_id)
+    if not player_data:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Player not found: {request.player_id}"
+        )
+
+    # Prepare team data (in real app, this would come from database or request)
+    team_data = {
+        'team_name': request.team_name if hasattr(request, 'team_name') else 'Liverpool FC',
+        'league': 'Premier League',
+        'playing_style': 'high_press',
+        'formation': '4-3-3',
+        'average_age': 26.5,
+        'budget_millions': 50.0,
+        'priority_positions': ['RW', 'ST', 'CAM'],
+        'desired_traits': ['pace', 'finishing', 'work_rate'],
+        'average_player_value': 30.0,
+        'team_personality': 'ambitious',
+        'requires_pace': True,
+        'requires_physicality': False,
+        'requires_technique': True,
+        'requires_experience': False,
+    }
+
+    # Analyze team fit
+    result = await team_fit_service.analyze_fit(
+        player_id=request.player_id,
+        player_data=player_data,
+        team_id=request.team_id,
+        team_data=team_data
+    )
+
+    # Convert breakdown to TeamFitBreakdown schema
+    breakdown_data = result.get('breakdown', {})
     breakdown = TeamFitBreakdown(
-        statistical_fit=90.0,
-        tactical_fit=88.0,
-        personality_fit=85.0,
-        chemistry_fit=87.0,
-        cultural_fit=92.0,
-        budget_fit=75.0,
-        age_fit=95.0
+        statistical_fit=breakdown_data.get('statistical_fit', {}).get('score', 50.0),
+        tactical_fit=breakdown_data.get('tactical_fit', {}).get('score', 50.0),
+        personality_fit=breakdown_data.get('personality_fit', {}).get('score', 50.0),
+        chemistry_fit=breakdown_data.get('chemistry_fit', {}).get('score', 50.0),
+        cultural_fit=breakdown_data.get('cultural_fit', {}).get('score', 50.0),
+        budget_fit=breakdown_data.get('budget_fit', {}).get('score', 50.0),
+        age_fit=breakdown_data.get('age_fit', {}).get('score', 50.0)
     )
 
     return TeamFitResponse(
         player_id=request.player_id,
-        player_name="Mohamed Salah",
+        player_name=result.get('player_name', 'Unknown'),
         team_id=request.team_id,
-        team_name="Liverpool FC",
-        fit_score=87.5,
-        fit_rating="EXCELLENT_FIT",
-        recommendation="STRONG_BUY",
+        team_name=result.get('team_name', 'Unknown Team'),
+        fit_score=result.get('overall_fit_score', 50.0),
+        fit_rating=result.get('fit_rating', 'MODERATE_FIT'),
+        recommendation=result.get('recommendation', 'Requires further assessment'),
         breakdown=breakdown,
-        strengths=[
-            "Plays in priority position (RW)",
-            "Perfect age bracket for immediate impact",
-            "Excellent cultural and tactical alignment",
-            "High performance level matches team standards"
-        ],
-        concerns=[
-            "Market value may be above budget constraints",
-            "Minor tactical adjustment needed for pressing system"
-        ],
-        adaptation_timeline="IMMEDIATE (0-1 months)"
+        strengths=result.get('key_strengths', []),
+        concerns=result.get('potential_concerns', []),
+        adaptation_timeline=result.get('adaptation_timeline', 'UNKNOWN')
     )
 
 
@@ -108,25 +136,47 @@ async def get_moneyball_valuation(
             detail="Moneyball Valuation requires Professional plan or higher. Upgrade to access this feature."
         )
 
-    # TODO Phase 2: Connect to real MoneyballService
-    # moneyball_service = MoneyballService()
-    # result = moneyball_service.calculate_valuation(player_id)
+    # Get services
+    moneyball_service = get_moneyball_service()
+    data_service = get_data_service()
 
-    # TEMPORARY: Mock data for Phase 1
-    comparables = [
-        ComparablePlayer(name="Bukayo Saka", value=120.0, similarity=0.92),
-        ComparablePlayer(name="Rafael Leão", value=90.0, similarity=0.88),
-        ComparablePlayer(name="Khvicha Kvaratskhelia", value=80.0, similarity=0.85)
+    # Get player data
+    player_data = await data_service.get_player_profile(player_id)
+    if not player_data:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Player not found: {player_id}"
+        )
+
+    # Get market value
+    market_value = player_data.get('market_data', {}).get('market_value', 10.0)
+
+    # Calculate Moneyball valuation
+    result = await moneyball_service.calculate_valuation(
+        player_id=player_id,
+        player_stats=player_data,
+        market_value=market_value
+    )
+
+    # Prepare comparable players (placeholder - TODO: implement similarity search)
+    comparables = result.get('comparable_players', [])
+    comparable_list = [
+        ComparablePlayer(
+            name=comp.get('name', 'Unknown'),
+            value=comp.get('value', 0.0),
+            similarity=comp.get('similarity', 0.0)
+        )
+        for comp in comparables
     ]
 
     return MoneyballValuationResponse(
         player_id=player_id,
-        player_name="Mohamed Salah",
-        market_value=65.0,
-        calculated_value=95.0,
-        value_ratio=1.46,
-        category="UNDERVALUED",
-        roi_potential=46.2,
-        recommendation="BUY",
-        comparable_players=comparables
+        player_name=result.get('player_name', 'Unknown'),
+        market_value=result.get('market_value', 10.0),
+        calculated_value=result.get('calculated_value', 10.0),
+        value_ratio=result.get('value_ratio', 1.0),
+        category=result.get('category', 'FAIR'),
+        roi_potential=result.get('roi_potential', 0.0),
+        recommendation=result.get('recommendation', 'HOLD'),
+        comparable_players=comparable_list
     )
